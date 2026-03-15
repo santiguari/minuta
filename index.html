@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -20,12 +21,12 @@ scroll-behavior:smooth;
 
 body{
 margin:0;
-font-family:'Montserrat', sans-serif;
+font-family:'Montserrat',sans-serif;
 color:#333;
 position:relative;
 }
 
-/* IMAGEN DE FONDO */
+/* FONDO */
 
 body::before{
 content:"";
@@ -85,6 +86,8 @@ border-radius:12px;
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
+/* TITULOS */
+
 h1{
 text-align:center;
 margin-bottom:40px;
@@ -95,6 +98,8 @@ h2{
 border-bottom:2px solid #eee;
 padding-bottom:10px;
 }
+
+/* AGENDA */
 
 .item{
 margin:22px 0;
@@ -118,11 +123,30 @@ margin:10px 0;
 font-size:19px;
 }
 
+/* HIMNOS */
+
 pre{
 white-space:pre-wrap;
 font-family:inherit;
 font-size:18px;
 line-height:1.7;
+}
+
+/* IMAGEN EXTRA */
+
+.image-section{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:40px 20px;
+}
+
+.image-section img{
+max-width:1000px;
+width:90%;
+border-radius:12px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
 /* RESPONSIVE */
@@ -136,18 +160,21 @@ padding:30px;
 
 }
 
-/* ACTIVAR MODO PDF */
+/* -------- PDF MODE -------- */
+
+#pdf-layout{
+display:none;
+}
 
 .pdf-mode .agenda-section,
-.pdf-mode .hymn-section{
+.pdf-mode .hymn-section,
+.pdf-mode .image-section{
 display:none;
 }
 
 .pdf-mode #pdf-layout{
 display:block;
 }
-
-/* quitar fondo blur */
 
 .pdf-mode::before,
 .pdf-mode::after{
@@ -158,7 +185,7 @@ display:none;
 width:100%;
 height:100vh;
 display:flex;
-font-family:'Montserrat', sans-serif;
+font-family:'Montserrat',sans-serif;
 }
 
 .pdf-column{
@@ -170,6 +197,11 @@ border-right:1px solid #ccc;
 
 .pdf-column:last-child{
 border-right:none;
+}
+
+.pdf-column pre{
+font-size:12px;
+line-height:1.4;
 }
 
 </style>
@@ -219,7 +251,6 @@ border-right:none;
 
 </section>
 
-
 <!-- HIMNO 154 -->
 
 <section id="h154" class="hymn-section">
@@ -229,10 +260,30 @@ border-right:none;
 <h2>Himno 154 — Haz tú lo justo</h2>
 
 <pre>
-1.Haz tú lo justo. Raya el alba;
+1. Haz tú lo justo. Raya el alba;
 luz y justicia de nuevo se ven.
 Ángeles toman, arriba, en cuenta
 todos los hechos; oh haz tú el bien.
+
+Haz tú lo justo por más que te cueste.
+Lucha sin tregua fielmente también,
+y con buen ánimo busca lo bueno.
+Dios te protegerá; haz tú el bien.
+
+2. Haz tú lo justo. Caen los grillos;
+nuestras cadenas ya sueltas estén.
+Rotas por fe, cesarán de dañarnos.
+Vence la luz al mal; haz tú el bien.
+
+Haz tú lo justo por más que te cueste.
+Lucha sin tregua fielmente también,
+y con buen ánimo busca lo bueno.
+Dios te protegerá; haz tú el bien.
+
+3. Haz tú lo justo, siempre sin miedo.
+Ama al Salvador; Él da sostén.
+Él da consuelo al triste que llora.
+Él te bendecirá; haz tú el bien.
 
 Haz tú lo justo por más que te cueste.
 Lucha sin tregua fielmente también,
@@ -244,7 +295,6 @@ Dios te protegerá; haz tú el bien.
 
 </section>
 
-
 <!-- HIMNO 1060 -->
 
 <section id="h1060" class="hymn-section">
@@ -254,41 +304,63 @@ Dios te protegerá; haz tú el bien.
 <h2>Himno 1060 — Un arca construiré</h2>
 
 <pre>
-1.Fue Noé profeta, leal y sin temor.
+1. Fue Noé profeta, leal y sin temor.
 Dijo: “Arrepentíos”, mas nadie lo escuchó.
 Dios mandó un arca preparar
 que pudiera en aguas navegar.
 
 Noé fue obediente, diciéndose así:
 “Pronto lloverá, un arca construiré.
-Seguiré al Señor, Su palabra escucharé.
+Seguiré al Señor, Su palabra escucharé;
+todo así yo prepararé,
+en Su ley caminaré.
+Y al llover fuerte sobre mí,
+preparado estaré”.
+
+2. Cual Noé yo puedo también en Dios confiar.
+Y tal como un arca, mi fe me ayudará.
+Puedo yo vivir con honradez.
+Puedo orar con fe y aprender.
+
+Y si tormentas hay, en mi arca paz tendré.
+
+Pronto lloverá, un arca construiré.
+Seguiré al profeta, la voz de Dios es él;
+todo así yo prepararé,
+en Su ley caminaré.
+Y al llover fuerte sobre mí,
+preparado estaré.
 </pre>
 
 </div>
 
 </section>
 
+<!-- IMAGEN EXTRA -->
 
-<!-- LAYOUT PARA PDF -->
+<section class="image-section">
+
+<img src="bautismo2.jpeg" alt="Bautismo">
+
+</section>
+
+<!-- PDF LAYOUT -->
 
 <div id="pdf-layout">
 
 <div class="pdf-page">
 
 <div class="pdf-column" id="pdf-agenda"></div>
-
 <div class="pdf-column" id="pdf-hymn1"></div>
-
 <div class="pdf-column" id="pdf-hymn2"></div>
 
 </div>
 
 </div>
 
-
 <script>
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded",function(){
 
 if(window.location.hash === "#PDF"){
 
