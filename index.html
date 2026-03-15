@@ -176,42 +176,64 @@ display:none;
 display:block;
 }
 
-/* quitar fondo en modo pdf */
+/* quitar fondo en pdf */
 
 .pdf-mode::before,
 .pdf-mode::after{
 display:none;
 }
 
+/* tamaño hoja */
+
+@media print {
+
+@page{
+size:A4 landscape;
+margin:10mm;
+}
+
+body{
+margin:0;
+}
+
+}
+
 /* pagina pdf */
 
 .pdf-page{
 width:100%;
-min-height:100vh;
+height:100vh;
 display:flex;
 font-family:'Montserrat',sans-serif;
 box-sizing:border-box;
-padding:20px;
 }
 
 /* columnas */
 
 .pdf-column{
+
 width:33.33%;
-padding:15px;
+padding:20px;
 box-sizing:border-box;
+
 border-right:1px solid #ccc;
-overflow:hidden;
+
+/* importante */
+
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+
 }
 
 .pdf-column:last-child{
 border-right:none;
 }
 
-/* ajustar contenido */
+/* titulos */
 
 .pdf-column h1{
-font-size:20px;
+font-size:22px;
 margin-bottom:15px;
 }
 
@@ -220,41 +242,34 @@ font-size:18px;
 margin-bottom:10px;
 }
 
+/* agenda */
+
 .pdf-column .item{
-font-size:14px;
+font-size:15px;
 margin:8px 0;
 }
 
 .pdf-column li{
-font-size:13px;
-margin:4px 0;
+font-size:14px;
+margin:5px 0;
 }
 
+/* himnos */
+
 .pdf-column pre{
-font-size:11px;
-line-height:1.35;
+
+font-size:13px;
+line-height:1.45;
+
 white-space:pre-wrap;
 word-break:break-word;
+
 }
 
 /* evitar desbordes */
 
 .pdf-column *{
 max-width:100%;
-}
-
-/* impresión */
-
-@media print{
-
-body{
-margin:0;
-}
-
-.pdf-page{
-height:100vh;
-}
-
 }
 
 </style>
