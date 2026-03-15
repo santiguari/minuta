@@ -234,6 +234,17 @@ padding:30px;
 
 }
 
+.hymn-body{
+flex:1;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.hymn-body pre{
+white-space:pre-wrap;
+}  
+
 </style>
 
 </head>
@@ -441,13 +452,31 @@ const pdfAgenda = document.getElementById("pdf-agenda")
 const pdfHymn1 = document.getElementById("pdf-hymn1")
 const pdfHymn2 = document.getElementById("pdf-hymn2")
 
+/* agenda */
+
 pdfAgenda.innerHTML = agenda.innerHTML
-pdfHymn1.innerHTML = hymn1.innerHTML
-pdfHymn2.innerHTML = hymn2.innerHTML
+
+/* himno 154 */
+
+pdfHymn1.innerHTML = `
+<h2>${hymn1.querySelector("h2").innerText}</h2>
+<div class="hymn-body">
+${hymn1.querySelector("pre").outerHTML}
+</div>
+`
+
+/* himno 1060 */
+
+pdfHymn2.innerHTML = `
+<h2>${hymn2.querySelector("h2").innerText}</h2>
+<div class="hymn-body">
+${hymn2.querySelector("pre").outerHTML}
+</div>
+`
 
 requestAnimationFrame(()=>{
 
-document.querySelectorAll(".pdf-content").forEach(el=>{
+document.querySelectorAll(".hymn-body").forEach(el=>{
 autoSizeText(el)
 })
 
