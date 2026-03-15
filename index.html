@@ -26,7 +26,7 @@ color:#333;
 position:relative;
 }
 
-/* FONDO */
+/* fondo blur */
 
 body::before{
 content:"";
@@ -58,7 +58,7 @@ background:rgba(255,255,255,0.75);
 z-index:-1;
 }
 
-/* SECCIONES */
+/* secciones */
 
 .agenda-section,
 .hymn-section{
@@ -69,7 +69,7 @@ justify-content:center;
 padding:40px 20px;
 }
 
-/* TARJETAS */
+/* tarjetas */
 
 .agenda-container,
 .hymn{
@@ -86,12 +86,9 @@ border-radius:12px;
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* TITULOS */
-
 h1{
 text-align:center;
 margin-bottom:40px;
-font-weight:600;
 }
 
 h2{
@@ -99,7 +96,7 @@ border-bottom:2px solid #eee;
 padding-bottom:10px;
 }
 
-/* AGENDA */
+/* agenda */
 
 .item{
 margin:22px 0;
@@ -123,7 +120,7 @@ margin:10px 0;
 font-size:19px;
 }
 
-/* HIMNOS */
+/* himnos */
 
 pre{
 white-space:pre-wrap;
@@ -132,7 +129,7 @@ font-size:18px;
 line-height:1.7;
 }
 
-/* IMAGEN EXTRA */
+/* imagen intermedia */
 
 .image-section{
 min-height:100vh;
@@ -147,17 +144,6 @@ max-width:1000px;
 width:90%;
 border-radius:12px;
 box-shadow:0 10px 25px rgba(0,0,0,0.15);
-}
-
-/* RESPONSIVE */
-
-@media (max-width:600px){
-
-.agenda-container,
-.hymn{
-padding:30px;
-}
-
 }
 
 /* -------- PDF MODE -------- */
@@ -176,14 +162,12 @@ display:none;
 display:block;
 }
 
-/* quitar fondo en pdf */
-
 .pdf-mode::before,
 .pdf-mode::after{
 display:none;
 }
 
-/* tamaño hoja */
+/* hoja A4 */
 
 @media print {
 
@@ -205,7 +189,6 @@ width:100%;
 height:100vh;
 display:flex;
 font-family:'Montserrat',sans-serif;
-box-sizing:border-box;
 }
 
 /* columnas */
@@ -218,11 +201,11 @@ box-sizing:border-box;
 
 border-right:1px solid #ccc;
 
-/* importante */
-
 display:flex;
-flex-direction:column;
-justify-content:space-between;
+align-items:center;
+justify-content:center;
+
+overflow:hidden;
 
 }
 
@@ -230,46 +213,22 @@ justify-content:space-between;
 border-right:none;
 }
 
-/* titulos */
+/* contenedor escalable */
 
-.pdf-column h1{
-font-size:22px;
-margin-bottom:15px;
+.pdf-content{
+width:100%;
+transform-origin:top center;
 }
 
-.pdf-column h2{
-font-size:18px;
-margin-bottom:10px;
+/* responsive */
+
+@media (max-width:600px){
+
+.agenda-container,
+.hymn{
+padding:30px;
 }
 
-/* agenda */
-
-.pdf-column .item{
-font-size:15px;
-margin:8px 0;
-}
-
-.pdf-column li{
-font-size:14px;
-margin:5px 0;
-}
-
-/* himnos */
-
-.pdf-column pre{
-
-font-size:13px;
-line-height:1.45;
-
-white-space:pre-wrap;
-word-break:break-word;
-
-}
-
-/* evitar desbordes */
-
-.pdf-column *{
-max-width:100%;
 }
 
 </style>
@@ -319,15 +278,13 @@ max-width:100%;
 
 </section>
 
-
 <!-- IMAGEN -->
 
 <section class="image-section">
 
-<img src="bautismo2.jpg" alt="Bautismo">
+<img src="bautismo2.jpg">
 
 </section>
-
 
 <!-- HIMNO 154 -->
 
@@ -373,7 +330,6 @@ Dios te protegerá; haz tú el bien.
 
 </section>
 
-
 <!-- HIMNO 1060 -->
 
 <section id="h1060" class="hymn-section">
@@ -414,23 +370,56 @@ preparado estaré.
 
 </section>
 
-
 <!-- PDF LAYOUT -->
 
 <div id="pdf-layout">
 
 <div class="pdf-page">
 
-<div class="pdf-column" id="pdf-agenda"></div>
-<div class="pdf-column" id="pdf-hymn1"></div>
-<div class="pdf-column" id="pdf-hymn2"></div>
+<div class="pdf-column">
+<div class="pdf-content" id="pdf-agenda"></div>
+</div>
 
+<div class="pdf-column">
+<div class="pdf-content" id="pdf-hymn1"></div>
+</div>
+
+<div class="pdf-column">
+<div class="pdf-content" id="pdf-hymn2"></div>
 </div>
 
 </div>
 
+</div>
 
 <script>
+
+function autoFit(element){
+
+let parent = element.parentElement
+
+let scale = 1
+let step = 0.02
+
+element.style.transform="scale(1)"
+
+while(true){
+
+scale += step
+element.style.transform=`scale(${scale})`
+
+if(
+element.scrollHeight > parent.clientHeight ||
+element.scrollWidth > parent.clientWidth
+){
+scale -= step
+element.style.transform=`scale(${scale})`
+break
+}
+
+}
+
+}
 
 document.addEventListener("DOMContentLoaded",function(){
 
@@ -445,6 +434,14 @@ const hymn2 = document.querySelector("#h1060 .hymn")
 document.getElementById("pdf-agenda").innerHTML = agenda.innerHTML
 document.getElementById("pdf-hymn1").innerHTML = hymn1.innerHTML
 document.getElementById("pdf-hymn2").innerHTML = hymn2.innerHTML
+
+setTimeout(()=>{
+
+document.querySelectorAll(".pdf-content").forEach(el=>{
+autoFit(el)
+})
+
+},100)
 
 }
 
