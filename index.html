@@ -217,7 +217,10 @@ border-right:none;
 
 .pdf-content{
 width:100%;
-transform-origin:top center;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
 }
 
 /* responsive */
@@ -394,32 +397,33 @@ preparado estaré.
 
 <script>
 
-function fitContent(element){
+function autoSizeText(container){
 
-const parent = element.parentElement
+const parent = container.parentElement
 
-let min = 0.5
-let max = 3
-let scale = 1
+let min = 10
+let max = 120
+let best = 10
 
-for(let i=0;i<20;i++){
+while(min <= max){
 
-scale = (min + max) / 2
+let mid = Math.floor((min + max) / 2)
 
-element.style.transform = `scale(${scale})`
+container.style.fontSize = mid + "px"
 
 if(
-element.scrollHeight > parent.clientHeight ||
-element.scrollWidth > parent.clientWidth
+container.scrollHeight <= parent.clientHeight &&
+container.scrollWidth <= parent.clientWidth
 ){
-max = scale
+best = mid
+min = mid + 1
 }else{
-min = scale
+max = mid - 1
 }
 
 }
 
-element.style.transform = `scale(${min})`
+container.style.fontSize = best + "px"
 
 }
 
@@ -433,14 +437,18 @@ const agenda = document.querySelector(".agenda-container")
 const hymn1 = document.querySelector("#h154 .hymn")
 const hymn2 = document.querySelector("#h1060 .hymn")
 
-document.getElementById("pdf-agenda").innerHTML = agenda.innerHTML
-document.getElementById("pdf-hymn1").innerHTML = hymn1.innerHTML
-document.getElementById("pdf-hymn2").innerHTML = hymn2.innerHTML
+const pdfAgenda = document.getElementById("pdf-agenda")
+const pdfHymn1 = document.getElementById("pdf-hymn1")
+const pdfHymn2 = document.getElementById("pdf-hymn2")
+
+pdfAgenda.innerHTML = agenda.innerHTML
+pdfHymn1.innerHTML = hymn1.innerHTML
+pdfHymn2.innerHTML = hymn2.innerHTML
 
 requestAnimationFrame(()=>{
 
 document.querySelectorAll(".pdf-content").forEach(el=>{
-fitContent(el)
+autoSizeText(el)
 })
 
 })
