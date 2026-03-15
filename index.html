@@ -394,30 +394,32 @@ preparado estaré.
 
 <script>
 
-function autoFit(element){
+function fitContent(element){
 
-let parent = element.parentElement
+const parent = element.parentElement
 
+let min = 0.5
+let max = 3
 let scale = 1
-let step = 0.02
 
-element.style.transform="scale(1)"
+for(let i=0;i<20;i++){
 
-while(true){
+scale = (min + max) / 2
 
-scale += step
-element.style.transform=`scale(${scale})`
+element.style.transform = `scale(${scale})`
 
 if(
 element.scrollHeight > parent.clientHeight ||
 element.scrollWidth > parent.clientWidth
 ){
-scale -= step
-element.style.transform=`scale(${scale})`
-break
+max = scale
+}else{
+min = scale
 }
 
 }
+
+element.style.transform = `scale(${min})`
 
 }
 
@@ -435,13 +437,13 @@ document.getElementById("pdf-agenda").innerHTML = agenda.innerHTML
 document.getElementById("pdf-hymn1").innerHTML = hymn1.innerHTML
 document.getElementById("pdf-hymn2").innerHTML = hymn2.innerHTML
 
-setTimeout(()=>{
+requestAnimationFrame(()=>{
 
 document.querySelectorAll(".pdf-content").forEach(el=>{
-autoFit(el)
+fitContent(el)
 })
 
-},100)
+})
 
 }
 
