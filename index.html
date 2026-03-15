@@ -286,21 +286,19 @@ document.addEventListener("DOMContentLoaded", function(){
 
 if(window.location.hash === "#PDF"){
 
-const agenda = document.querySelector(".agenda-container");
-const hymn1 = document.querySelector("#h154 .hymn");
-const hymn2 = document.querySelector("#h1060 .hymn");
+document.body.classList.add("pdf-mode")
 
-if(!agenda || !hymn1 || !hymn2) return;
+const agenda = document.querySelector(".agenda-container")
+const hymn1 = document.querySelector("#h154 .hymn")
+const hymn2 = document.querySelector("#h1060 .hymn")
 
-document.getElementById("pdf-agenda").innerHTML = agenda.innerHTML;
-document.getElementById("pdf-hymn1").innerHTML = hymn1.innerHTML;
-document.getElementById("pdf-hymn2").innerHTML = hymn2.innerHTML;
-
-document.body.innerHTML = document.getElementById("pdf-layout").outerHTML;
+document.getElementById("pdf-agenda").innerHTML = agenda.innerHTML
+document.getElementById("pdf-hymn1").innerHTML = hymn1.innerHTML
+document.getElementById("pdf-hymn2").innerHTML = hymn2.innerHTML
 
 }
 
-});
+})
 
 </script>
 
