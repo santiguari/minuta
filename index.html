@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Agenda Bautismal</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  
-<title>Agenda Bautismal</title>
 
 <style>
 
 html{
 scroll-behavior:smooth;
 }
-
-/* BODY */
 
 body{
 margin:0;
@@ -46,21 +46,6 @@ transform:scale(1.15);
 z-index:-2;
 }
 
-@media (max-width:600px){
-
-body::before{
-
-background-size:cover;
-background-position:center;
-background-repeat:no-repeat;
-
-height:120vh;
-}
-
-}  
-
-/* CAPA CLARA PARA MEJOR LECTURA */
-
 body::after{
 content:"";
 position:fixed;
@@ -68,9 +53,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-
 background:rgba(255,255,255,0.75);
-
 z-index:-1;
 }
 
@@ -80,63 +63,49 @@ z-index:-1;
 .hymn-section{
 min-height:100vh;
 display:flex;
-align-items:flex-start;   /* mueve el contenido hacia arriba */
+align-items:flex-start;
 justify-content:center;
 padding:40px 20px;
 }
 
-/* RECUADROS */
+/* TARJETAS */
 
 .agenda-container,
 .hymn{
 
 max-width:1000px;
 width:90%;
-min-height:650px;
 
-background:rgba(255,255,255,0.90);
+background:rgba(255,255,255,0.9);
 backdrop-filter:blur(6px);
 
-padding:60px;
+padding:50px;
 border-radius:12px;
 
 box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
-/* TITULOS */
-
 h1{
 text-align:center;
 margin-bottom:40px;
-font-size:36px;
+font-weight:600;
 }
 
 h2{
 border-bottom:2px solid #eee;
 padding-bottom:10px;
-margin-bottom:25px;
 }
-
-/* ITEMS AGENDA */
 
 .item{
 margin:22px 0;
 font-size:20px;
 }
 
-/* LINKS HIMNOS */
-
 .hymn-link{
 color:#2c3e50;
 font-weight:bold;
 text-decoration:none;
 }
-
-.hymn-link:hover{
-text-decoration:underline;
-}
-
-/* LISTA BAUTISMOS */
 
 .bautismos{
 margin-top:20px;
@@ -148,8 +117,6 @@ padding-left:25px;
 margin:10px 0;
 font-size:19px;
 }
-
-/* TEXTO HIMNOS */
 
 pre{
 white-space:pre-wrap;
@@ -167,21 +134,40 @@ line-height:1.7;
 padding:30px;
 }
 
-h1{
-font-size:28px;
 }
 
-.item{
-font-size:18px;
+/* -------- PDF MODE -------- */
+
+#pdf-layout{
+display:none;
 }
 
-pre{
-font-size:16px;
+.pdf-page{
+width:100%;
+height:100vh;
+display:flex;
+font-family:'Montserrat', sans-serif;
 }
 
+.pdf-column{
+width:33.33%;
+padding:30px;
+box-sizing:border-box;
+border-right:1px solid #ccc;
+overflow:hidden;
+}
+
+.pdf-column:last-child{
+border-right:none;
+}
+
+.pdf-column pre{
+font-size:12px;
+line-height:1.4;
 }
 
 </style>
+
 </head>
 
 <body>
@@ -246,26 +232,6 @@ Haz tú lo justo por más que te cueste.
 Lucha sin tregua fielmente también,
 y con buen ánimo busca lo bueno.
 Dios te protegerá; haz tú el bien.
-
-2.Haz tú lo justo. Caen los grillos;
-nuestras cadenas ya sueltas estén.
-Rotas por fe, cesarán de dañarnos.
-Vence la luz al mal; haz tú el bien.
-
-Haz tú lo justo por más que te cueste.
-Lucha sin tregua fielmente también,
-y con buen ánimo busca lo bueno.
-Dios te protegerá; haz tú el bien.
-
-3.Haz tú lo justo, siempre sin miedo.
-Ama al Salvador; Él da sostén.
-Él da consuelo al triste que llora.
-Él te bendecirá; haz tú el bien.
-
-Haz tú lo justo por más que te cueste.
-Lucha sin tregua fielmente también,
-y con buen ánimo busca lo bueno.
-Dios te protegerá; haz tú el bien.
 </pre>
 
 </div>
@@ -289,30 +255,48 @@ que pudiera en aguas navegar.
 
 Noé fue obediente, diciéndose así:
 “Pronto lloverá, un arca construiré.
-Seguiré al Señor, Su palabra escucharé;
-todo así yo prepararé,
-en Su ley caminaré.
-Y al llover fuerte sobre mí,
-preparado estaré”.
-
-2.Cual Noé yo puedo también en Dios confiar.
-Y tal como un arca, mi fe me ayudará.
-Puedo yo vivir con honradez.
-Puedo orar con fe y aprender.
-
-Y si tormentas hay, en mi arca paz tendré.
-
-Pronto lloverá, un arca construiré.
-Seguiré al profeta, la voz de Dios es él;
-todo así yo prepararé,
-en Su ley caminaré.
-Y al llover fuerte sobre mí,
-preparado estaré.
+Seguiré al Señor, Su palabra escucharé.
 </pre>
 
 </div>
 
 </section>
+
+
+<!-- LAYOUT PARA PDF -->
+
+<div id="pdf-layout">
+
+<div class="pdf-page">
+
+<div class="pdf-column" id="pdf-agenda"></div>
+
+<div class="pdf-column" id="pdf-hymn1"></div>
+
+<div class="pdf-column" id="pdf-hymn2"></div>
+
+</div>
+
+</div>
+
+
+<script>
+
+if(window.location.hash === "#PDF"){
+
+const agenda = document.querySelector(".agenda-container").innerHTML
+const hymn1 = document.querySelector("#h154 .hymn").innerHTML
+const hymn2 = document.querySelector("#h1060 .hymn").innerHTML
+
+document.getElementById("pdf-agenda").innerHTML = agenda
+document.getElementById("pdf-hymn1").innerHTML = hymn1
+document.getElementById("pdf-hymn2").innerHTML = hymn2
+
+document.body.innerHTML = document.getElementById("pdf-layout").outerHTML
+
+}
+
+</script>
 
 </body>
 </html>
