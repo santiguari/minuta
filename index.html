@@ -136,9 +136,21 @@ padding:30px;
 
 }
 
-/* -------- PDF MODE -------- */
+/* ACTIVAR MODO PDF */
 
-#pdf-layout{
+.pdf-mode .agenda-section,
+.pdf-mode .hymn-section{
+display:none;
+}
+
+.pdf-mode #pdf-layout{
+display:block;
+}
+
+/* quitar fondo blur */
+
+.pdf-mode::before,
+.pdf-mode::after{
 display:none;
 }
 
@@ -154,16 +166,10 @@ width:33.33%;
 padding:30px;
 box-sizing:border-box;
 border-right:1px solid #ccc;
-overflow:hidden;
 }
 
 .pdf-column:last-child{
 border-right:none;
-}
-
-.pdf-column pre{
-font-size:12px;
-line-height:1.4;
 }
 
 </style>
